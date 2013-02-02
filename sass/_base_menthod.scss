@@ -1,0 +1,55 @@
+@import "variables";
+@mixin centerTarget($w:1px,$t:0){
+	width:$w;
+	margin:$t auto;
+}
+//邊線
+@mixin borderstyle($w:1px,$s:solid ,$c:#666){
+	border-width:$w;
+	border-style:$s;
+	border-color:$c;
+}
+//圖片漸層
+@mixin linear-gradient($s,$e){
+	background-image: -moz-linear-gradient(top,$s, $e);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from($s), to($e));
+	background-image: -webkit-linear-gradient(top, $s, $e);
+	background-image: -o-linear-gradient(top, $s, $e);
+	background-image: linear-gradient(to bottom, $s,$e);
+	background-repeat: repeat-x;	
+}
+//背景漸層
+@mixin gradient-Generator($s,$e){
+	background: $s; 
+	background: -moz-linear-gradient(top, $s 1%, $e 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,$s), color-stop(100%,$e)); 
+	background: -webkit-linear-gradient(top, $s 1%,$e 100%); 
+	background: -o-linear-gradient(top, $s 1%,$e 100%); 
+	background: -ms-linear-gradient(top, $s 1%,$e 100%);
+	background: linear-gradient(to bottom, $s 1%,$e 100%); 
+//filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00abff', endColorstr='#0072ff',GradientType=0 ); /* IE6-9 *
+}
+//文字遮罩
+@mixin text-flowhidden($w,$h){
+	height:$h;
+	width:$w;
+	overflow:hidden;
+	word-wrap: break-word; 
+	word-break: normal;
+	/*word-break:break-all;  */
+	line-height:14px;
+}
+//三角形
+@mixin triangle($w:1px,$s:transparent transparent transparent transparent){
+	border-color:$s;
+	border-style:solid;
+	border-width:$w;
+	width:0;
+	height:0;
+}
+//css文字...
+@mixin text-ellipsis(){
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
