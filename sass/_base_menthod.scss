@@ -1,33 +1,38 @@
-@import "variables";
+﻿@import "compass/css3";
+@import "compass/utilities";
 @mixin centerTarget($w:1px,$t:0){
 	width:$w;
 	margin:$t auto;
 }
-//邊線
-@mixin borderstyle($w:1px,$s:solid ,$c:#666){
-	border-width:$w;
-	border-style:$s;
-	border-color:$c;
-}
 //圖片漸層
 @mixin linear-gradient($s,$e){
-	background-image: -moz-linear-gradient(top,$s, $e);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from($s), to($e));
 	background-image: -webkit-linear-gradient(top, $s, $e);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from($s), to($e));
+	background-image: -moz-linear-gradient(top,$s, $e);
 	background-image: -o-linear-gradient(top, $s, $e);
 	background-image: linear-gradient(to bottom, $s,$e);
 	background-repeat: repeat-x;	
 }
 //背景漸層
-@mixin gradient-Generator($s,$e){
+@mixin gradient-Generator($s,$e,$p:1%){
 	background: $s; 
-	background: -moz-linear-gradient(top, $s 1%, $e 100%); 
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,$s), color-stop(100%,$e)); 
-	background: -webkit-linear-gradient(top, $s 1%,$e 100%); 
-	background: -o-linear-gradient(top, $s 1%,$e 100%); 
-	background: -ms-linear-gradient(top, $s 1%,$e 100%);
-	background: linear-gradient(to bottom, $s 1%,$e 100%); 
+	background: -webkit-gradient(linear, left top, left bottom, color-stop($p,$s), color-stop(100%,$e)); 
+	background: -webkit-linear-gradient(top, $s $p,$e 100%); 
+	background: -moz-linear-gradient(top, $s $p, $e 100%); 
+	background: -ms-linear-gradient(top, $s $p,$e 100%);
+	background: -o-linear-gradient(top, $s $p,$e 100%); 
+	background: linear-gradient(to bottom, $s $p,$e 100%); 
 //filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00abff', endColorstr='#0072ff',GradientType=0 ); /* IE6-9 *
+}
+
+//三角形
+@mixin triangle($w:1px,$s:transparent transparent transparent transparent){
+	width:0;
+	height:0;
+	border-color:$s;
+	border-style:solid;
+	border-width:$w;
+	
 }
 //文字遮罩
 @mixin text-flowhidden($w,$h){
@@ -37,19 +42,139 @@
 	word-wrap: break-word; 
 	word-break: normal;
 	/*word-break:break-all;  */
-	line-height:14px;
-}
-//三角形
-@mixin triangle($w:1px,$s:transparent transparent transparent transparent){
-	border-color:$s;
-	border-style:solid;
-	border-width:$w;
-	width:0;
-	height:0;
 }
 //css文字...
 @mixin text-ellipsis(){
+	display: inline-block;
 	overflow:hidden;
+	vertical-align: top;
 	text-overflow:ellipsis;
 	white-space: nowrap;
+	zoom: 1;
+	*display: inline;
+}
+//圓弧
+@mixin box-radius($r){
+	@include border-radius($r);
+	//behavior: url(PIE.htc);
+}
+//小圓點
+@mixin little-dot($s,$c){
+	width: $s;
+	height: $s;
+	display: inline-block;
+	@include box-radius($s);
+	background-color: $c;
+}
+
+
+//opacity
+@mixin opacity ( $opacity )  { 
+    filter:alpha(opacity=#{$opacity*100});  // IE 5-9+ 
+    opacity:$opacity;  
+}
+
+//transition
+@mixin transition($s,$types:All,$easing:ease-in-out){
+	-webkit-transition:$types $s $easing;
+	   -moz-transition:$types $s $easing;
+	     -o-transition:$types $s $easing;
+	        transition:$types $s $easing;
+}
+//圖片至中
+@mixin imgCenter($w,$h){
+	width: #{$w}px;
+	height: #{$h}px;
+	line-height: #{$h*0.9}px;
+	text-align: center;
+	/* IE */
+	*font-size : #{$h*0.9}px;
+	*font-family : Arial;
+	img{
+		vertical-align : middle;
+		max-height: 100%;
+	}
+}
+@mixin vc-align($pw,$ph){
+	width: #{$pw}px;
+  	height: #{$ph}px;
+ 	text-align: center;
+  	margin: 0 auto;
+  	font-size:0;
+  	&:before {
+	  content: '';
+	  display: inline-block;
+	  vertical-align: middle ;
+	  height: 100%;
+	}
+	>.vcChild{
+		display: inline-block;
+		vertical-align: middle;
+		//要再設定高度與寬度，p文字標籤可不用
+		//http://blog.wu-boy.com/2013/07/css-vertical-align-center/
+	}
+}
+@mixin semi-transparent-colors( $attribute , $color , $background ){
+     $percent:alpha($color)*100%; 
+     $opaque:opacify($color,1);
+     $solid-color: mix( $opaque , $background , $percent );
+     #{$attribute}: $solid-color; 
+     #{$attribute}: $color;
+}
+
+@mixin long-shadow($type, $color, $length, $fadeout: true, $skew: false, $direction: right){
+  $shadow: '';
+  @if $skew == false or $type == text{
+    @if $direction == right {
+      @for $i from 0 to $length - 1 {
+        $shadow: $shadow + $i + 'px ' + $i + 'px 0 ' + $color + ',';
+      }
+    }
+    @if $direction == left {
+      @for $i from 0 to $length - 1 {
+        $shadow: $shadow + $i * -1 + 'px ' + $i + 'px 0 ' + $color + ',';
+       }
+      }
+     }
+        
+   @if $fadeout == true{
+    @for $i from 1 to $length - 1 {
+      @if $type == text or $skew == false{
+        @if $direction == right{
+          $shadow: $shadow + $i + 'px ' + $i + 'px 0 ' +       rgba($color, 1 - $i / $length) + ',';
+        }
+        @if $direction == left{
+          $shadow: $shadow + $i * -1 + 'px ' + $i + 'px 0 ' +       rgba($color, 1 - $i / $length) + ',';
+        }
+      }
+      @if ($type == box) and $skew == true{
+        @if $direction == right {
+          $shadow: $shadow + $i + 'px ' + $i + 'px 0 ' + $i * .2 + 'px ' + rgba($color, 1 - $i / $length) + ',';
+        }
+        @if $direction == left {
+          $shadow: $shadow + $i * -1 + 'px ' + $i + 'px 0 ' + $i * .2 + 'px ' + rgba($color, 1 - $i / $length) + ',';
+        }
+      }
+  }
+  $shadow: $shadow + $length + 'px ' + $length + 'px 0 ' + rgba($color, 0);
+ }
+ @if $fadeout == false{
+   @if $skew == true and ( $type == box ){
+     @for $i from 0 to $length - 1 {
+            $shadow: $shadow + $i + 'px ' + $i + 'px 0 ' + $i * .1 + 'px ' + $color + ',';
+      }
+   }
+    $shadow: $shadow + $length + 'px ' + $length + 'px 0 ' + rgba(0,0,0,0);
+ }
+ $shadow: unquote($shadow);
+  @if $type == 'box' {box-shadow: $shadow;}
+  @if $type == 'text' {text-shadow: $shadow;}
+}
+//change px to em
+@mixin fontToEm($font-size,$line-height:1.2,$parent-font:16){
+	font-size:#{1/$parent-font*$font-size}em;
+	line-height: $line-height;
+}
+@function toEm($value,$font-size:16){
+	@return #{1/$font-size*$value}em;
 }

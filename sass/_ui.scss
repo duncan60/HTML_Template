@@ -1,0 +1,205 @@
+﻿@import "_base_menthod";
+
+%bule-left-arrow {
+	display:block;
+	float:left;
+	margin-top: 3px;
+	@include triangle($w:5px,$s:transparent transparent transparent #33b9ff);
+}
+//頁籤切換
+%ui-pagination{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	@include box-shadow(0px,1px,1px,#b8b8b8);
+	li{
+		float:left;
+		a{	
+			display: block;
+			padding:toEm(6,12) toEm(10,12);
+			border: 1px solid #ddd;
+			border-left-width: 0;
+			@include fontToEm(12);
+			color:#6a6a6a;
+			&:hover{
+				color:$base_blue;
+			}
+
+		}
+	}
+	li:first-child a,.ui-first a{
+		border-left-width: 1px;
+	}
+	li.active{
+		background-color: #ededed;
+		a{
+			color:$base_blue;
+		}
+	}
+	a:hover .ui-next-arrow{
+		@include triangle(3px,transparent transparent transparent $base_blue);
+	}
+	a:hover .ui-forwrd-arrow{
+		@include triangle(3px,transparent $base_blue transparent transparent);
+	}
+	.ui-first>a,.ui-last>a{
+		*height:12px;
+	}
+}
+%ui-forwrd-arrow{
+	margin: 3px 0px;
+	@include triangle(3px,transparent #6a6a6a transparent transparent);
+	
+}
+
+%ui-next-arrow{
+	margin: 3px 0px;
+	@include triangle(3px,transparent transparent transparent #6a6a6a );
+}
+//---藍色按鈕1
+%ui-blue-btn{
+	@extend %inline-block;
+	position: relative;
+	padding:6px 30px;
+	border:none;
+	text-align: center;
+	@include gradient-Generator(#00a5fa,#0190da);
+	@include box-radius(6px);
+	@include box-shadow(0px,-1px,0px,#04d4fe);
+	@extend %transition;
+	&:hover{
+		@include gradient-Generator(#0190da,#0190da);
+	}
+}
+//---橘色按鈕1
+%ui-org-btn{
+	@extend %inline-block;
+	position: relative;
+	padding:10px 20px;
+	border:none;
+	text-align: center;
+	@include gradient-Generator(#ff9300,#ff7800);
+	@extend %transition;
+	&:hover{
+		@include gradient-Generator(#ff7800,#ff7800);
+	}
+}
+//紅色pop框
+%ui-red-pop {
+	position: relative;
+	padding: 0.6em;
+	background-color: #F00;
+	border: 1px solid #CCC;
+	color: #FFF;
+	text-shadow: 1px 1px 0px #000;
+	@include fontToEm(12);
+	@include box-radius(5px);
+	&:before {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		margin-left: -4px;
+		border-color:#F00  transparent transparent  transparent;
+		border-style: solid;
+		border-width: 0.5em;
+		width: 0;
+		height: 0;
+	}
+}
+
+//select
+%ui-select-box {
+	position: relative;
+	width: 148px;
+	height: 29px;
+	background-color: #FFF;
+	border:1px solid #D1D1D1;
+	font-size: 12px;
+	z-index: 100;
+	@include gradient-Generator(#ffffff,#ececec);
+	@include box-shadow(0px,0px,2px,#BEBEBE);
+	 p {
+	 	float: left;
+		width: 104px;
+		margin: 0;
+		padding: 0px 3px;
+		line-height: 29px;
+		text-align: center;
+		color: #000;
+		@extend %text-ellipsis;
+	}
+	.select-btn {
+		position: relative;
+		float: right;
+		width: 35px;
+		height: 29px;
+		border-width: 1px;
+		border-style: none none none solid;
+		border-color: #D1D1D1;
+		span {
+			position: absolute;
+			width: 0;
+			height: 0;
+			top: 12px;
+			left: 13px;
+			border-color: #1D95D3 transparent transparent transparent;
+			border-style: solid;
+			border-width: 5px;		
+		}
+	}
+}
+%ui-box-list {
+	position: absolute;
+	display: none;
+	list-style:none;
+	width: 100%;
+	margin: 0;
+	padding: 10px 0px;
+	top: 33px;
+	left: 0px;
+	border:1px solid #D1D1D1;
+	background-color: #FFF;
+	z-index: 10;
+	@include box-radius(5px);
+	@include box-shadow(0px,0px,4px,#BEBEBE);
+	li {
+		display: block;
+		width: 100%;
+		 a {
+		 	display: block;
+			padding: 10px;
+			font-size: 12px;
+			color: #ABABAB;
+			white-space: normal;
+		}
+		a:hover {
+			color: #FFF;
+		}
+		&:hover {
+			@include gradient-Generator(#02a9ff,#008dd6);
+			background-repeat: repeat-x;
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff02A9FF', endColorstr='#ff00a8ff', GradientType=0);
+		}
+	}
+}
+%ui-search-bar{
+	margin-top: 6px;
+	position:relative;
+	input[type="text"]{
+		width: 300px;
+		padding: 2px 36px 2px 2px;
+		&:focus{
+			outline: none;
+		}
+	}
+	#search-btn{
+		top: 3px;
+		right: 3px;
+		width: 25px;
+		height: 22px;
+		top: 2px\9;
+		position:absolute;
+		background-image:url(../images/search.png);
+	}
+}

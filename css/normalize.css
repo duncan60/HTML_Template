@@ -18,7 +18,8 @@ header,
 hgroup,
 nav,
 section,
-summary {
+summary,
+main {
     display: block;
 }
 
@@ -61,6 +62,7 @@ audio:not([controls]) {
  */
 
 html {
+    font-size: 100%;
     font-family: sans-serif; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
     -ms-text-size-adjust: 100%; /* 2 */
@@ -72,8 +74,10 @@ html {
  */
 
 body {
+    font-size:1em;
     margin: 0;
 }
+
 
 /* ==========================================================================
    Links
@@ -373,4 +377,31 @@ textarea {
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+
+/* myself*/
+section,nav,aside{
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, cite, code, del, dfn, em, img, q, s, samp, small, strike, strong, sub, sup, tt, var, dd, dl, dt, li, ol, ul, fieldset, form, label, legend, button, table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0;
+padding: 0;
+border: 0;
+font-weight: normal;
+font-style: normal;
+font-size: 100%;
+line-height: 1;
+font-family: inherit;
+vertical-align: baseline;
+}
+b, strong {
+font-weight: bold;
+}
+img{
+  max-width:100%;
+}
+header,footer,article{
+  margin: 0;
 }

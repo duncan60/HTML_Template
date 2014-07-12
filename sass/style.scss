@@ -1,20 +1,101 @@
-@import "_base";
-@import "_variables";
+﻿@charset "UTF-8";
+//----variables
+	$base-w:960;
+	$two-column-left:250px;
+	$two-column-right:600px;
+	$body-color:#ffffff;
+	$base_blue:#33b9ff;
+//----------
 @import "_base_menthod";
+@import "icons/*.png";
+@include all-icons-sprites;
+// width : percentage ($ width );百分比
+html{
+	height: 100%;
+	font-size :100%;
+}
+body{
+	background-color:$body-color;
+	font-family: sans-serif;
+	width: 100%;
+	min-height: 650px;
+	font-size :1em; 
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+*{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.ie7 * {
+  behavior: url(js/libs/boxsizing.htc);
+}
+a{
+	text-decoration: none;
+	cursor: pointer;
+	@extend %transition;
+	&:link{
+ 	 
+	}
+	&:visited{
+ 	 	
+	}
+	&:hover{
+ 	
+	}
+	&:active{
+ 	// background-color: transparent;
+	}
+}
+@import "_placeholder";
+@import "_basic";
+@import "_ui";
+@import "_bootstrap_Grid";
 
-/*==布局==*/
+header[role="banner"] {
 
+}
+#header-top{
+	height: 100px;
+	
+}
+.main-nav{
+	//主導航列
+	float: right;
+	margin:4px 0 0;
+	list-style: none;
+	text-decoration: none;
+	@extend %clearfix;
+	li{
+		float: left;
+		margin-left: 24px;
+	}
+	a{	
+		display: block;
+		@include fontToEm(15);
+		padding: 10px 0;
+		color:#ffffff;
+		&:hover,&.active{
+			color:$base_blue;
+		}
+	}
+}
+.wrapper{
+	width: toEm($base-w);
+	min-height: toEm(300);
+	margin:0 auto 100px;
+}
 
+.inner{
+	width:toEm($base-w);
+	margin:0 auto;
+}
+.assistive-text{
+	@extend %assistive-text;
+}
 
+@import "_hack";
 
-
-
-/*==外觀==*/
-
-
-
-
-
-
-
-/*==行為==*/

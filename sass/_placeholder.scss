@@ -1,0 +1,206 @@
+﻿
+@import "_base_menthod";
+
+.clearfix,%clearfix {
+    * zoom:1;
+    &:after,
+    &:before{
+         content:"";
+         display:table;
+    }
+    &:after{
+         clear: both;
+         overflow: hidden;
+    }
+}
+%font-family{
+	font-family: Arial,'微軟正黑體','新細明體', Helvetica, sans-serif;
+	*font-family:'微軟正黑體','新細明體', Arial, Helvetica, sans-serif;
+}
+
+%transition{
+	@include transition(.1s);
+}
+%transition2s{
+	@include transition(.2s);
+}
+%text-ellipsis{
+	@include text-ellipsis();
+}
+%assistive-text {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);
+}
+%hide-text{
+	font:0/0 a;
+	color:transparent;
+	text-shadow:none;
+	background-color:transparent;
+	border:0;
+}
+%box-sizing{
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+    	-ms-box-sizing: border-box;
+         -o-box-sizing: border-box;
+            box-sizing: border-box;
+}
+%inline-block{
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	vertical-align: top;
+}
+%seam{
+    clear : both;
+    display : block;
+    height : 0 px; 
+    border-top : 1 px solid rgba(0,0,0,.12); 
+    border-bottom : 1 px solid rgba(255,255,255,.15); 
+}
+//----two-column-------
+%full-two-column{
+	display: inline-block;
+	position: relative;
+	@extend %box-sizing;
+	@extend %clearfix;
+	width: 100%;
+	min-width: toEm($base-w);
+	vertical-align: bottom;
+	.two-column-left{
+		float: left;
+		@extend %box-sizing;
+		width:$two-column-left;
+		height: auto;
+		//position: relative;
+	}
+	.two-column-right{
+		@extend %box-sizing;
+		/*
+		position:absolute;
+		left:0;
+		right:0;
+		*/
+		min-height: 400px;
+		height: auto ;
+		margin-left: $two-column-left;
+	}
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+ 	.full-two-column{		
+		.two-column-left{
+					
+		}
+		.two-column-right{
+				
+		}
+	}
+}
+%two-column{
+	display: inline-block;
+	position: relative;
+	border-left: $two-column-left solid #fff;
+	vertical-align: bottom;
+	.two-column-left{
+		position: relative;
+		float: left;
+		@extend %box-sizing;
+		width:$two-column-left;
+		*width: $two-column-left;
+		height: auto ;
+		margin-left: -$two-column-left;
+	}
+	.two-column-left.fh{
+		position: absolute;
+		bottom: 0px;
+		top: 0px;
+	}
+	.two-column-right{
+		@extend %box-sizing;
+		min-height: 400px;
+		height: auto ;
+		//width:$two-column-right;
+		//*width: $two-column-right;
+	}
+}
+//兩欄post
+%two-post{
+	.p-f,.p-s{
+		float:left;
+	}
+	.p-f{
+		margin-right: 10px;
+	}
+	.p-title{
+		padding-bottom: 10px;
+		@extend %font-family;
+	}
+}
+//-----------form
+%form-horizontal{
+	font-size: 14px;
+	.form-item {
+		zoom: 1;
+	}
+	.form-item {
+		margin-bottom: 9px;
+		&.error{
+			.form-text{
+				border:1px solid red;
+			}
+			.form-text:focus, textarea:focus {
+				border-color: rgba(200, 127, 127,0.6);
+				-webkit-box-shadow: inset 0 1px 3px rgba(255, 2, 2, 0.8), 0 0 8px rgba(250, 127, 127,0.8);
+				-moz-box-shadow: inset 0 1px 3px rgba(255, 2, 2, 0.8), 0 0 8px rgba(250, 127, 127,0.8);
+				box-shadow: inset 0 1px 3px rgba(255, 2, 2, 0.8), 0 0 8px rgba(250, 127, 127,0.8);
+			}
+		}
+	}
+	.form-item:before, .form-item:after {
+		content: "";
+		display: table;
+	}
+	.form-item:after {
+		clear: both;
+		overflow: hidden;
+	}	
+	label {
+		line-height: 1.8;
+		float: left;
+		text-align: right;
+		width: 150px;
+		padding-right: 4px;
+	}	
+	.form-field {
+		float: left;
+	}
+	.form-text {
+		margin: 0;
+		font: 12px/1.5 Helvetica,Arial;
+		height: 18px;
+		width: 280px;
+	}
+	.form-text, textarea, select {
+		border:none;
+		border-top: 1px solid #CCC;
+		border-radius: 3px 3px 3px 3px;
+		padding: 4px;
+		background-color: #e9e9e9;
+	}
+	.form-text:focus, textarea:focus {
+		border-color: rgba(82, 168, 236, 0.8);
+		-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+		-moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+		box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+	}
+	textarea{
+		resize: none;
+		width: 380px;
+		height: 140px;
+	}
+	.form-text:focus, textarea:focus, select {
+		outline: 0 none;
+	}
+}
+
